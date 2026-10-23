@@ -1,0 +1,26 @@
+# 模型本体（14G fuse 模型 / 1.2G adapter / checkpoint）不进 Git
+models/**/*.safetensors
+**/adapters*.safetensors
+**/adapter_config.json
+**/checkpoint*/
+**/*.pt
+**/*.bin
+
+# 原始大数据（>50M 的源语料，仓内 data/ 已含整理好的训练集）
+new_data/raw/
+new_data/parts/
+*.CodeExercise*
+CodeExercise-Python*.jsonl
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# 系统/编辑器
+.DS_Store
+*.log.swp
+
+# 生成的对比表（可再生，不强制入库，按需 git add -f）
+对比表.md
+对比表.html

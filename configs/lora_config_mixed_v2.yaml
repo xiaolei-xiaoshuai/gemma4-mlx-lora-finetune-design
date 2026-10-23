@@ -1,0 +1,34 @@
+# Gemma-4 26B-A4B (4bit QAT) · v2 混合数据集 LoRA 配置
+# 50% DocVQA + 25% Code + 25% 通用对话 = 15,000 条 (train 13,498)
+# 纯文本 messages 格式 (MLX 自动走 ChatDataset, mask_prompt=true 只对 assistant 算 loss)
+# 运行: /Users/Admin/venvs/mlx/bin/mlx_lm.lora -c lora_config_mixed_v2.yaml --model "/Users/Admin/.lmstudio/models/lmstudio-community/gemma-4-26B-A4B-it-QAT-MLX-4bit" --train
+data: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/data_mixed_v2
+seed: 42
+
+# LoRA 本体
+fine_tune_type: lora
+num_layers: -1                  # 全部 30 层
+lora_parameters:
+  rank: 8
+  scale: 4.0                    # 缩放因子 4（沿用 v1，防过拟合）
+  dropout: 0.0
+
+# 训练
+batch_size: 1
+grad_accumulation_steps: 1
+iters: 13498                    # 1 epoch
+learning_rate: 5.0e-5
+optimizer: adamw
+mask_prompt: true               # 只对答案算 loss
+max_seq_length: 2048            # 代码/文档较长，留足空间
+grad_checkpoint: true
+
+# —— 100 步一档 ——
+steps_per_report: 100
+steps_per_eval: 100
+val_batches: 100
+save_every: 2500                # 存 5 个 ckpt
+test: true
+test_batches: 100
+
+adapter_path: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/adapters_mixed_v2

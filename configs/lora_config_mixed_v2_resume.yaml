@@ -1,0 +1,33 @@
+# v2 断点续训：从 7500 步 ckpt 续跑剩余 5998 步（总 13,498）
+# 用 --resume-adapter-file adapters_mixed_v2/0007500_adapters.safetensors
+# 运行: /Users/Admin/venvs/mlx/bin/mlx_lm.lora -c lora_config_mixed_v2_resume.yaml \
+#       --model "/Users/Admin/.lmstudio/models/lmstudio-community/gemma-4-26B-A4B-it-QAT-MLX-4bit" --train \
+#       --resume-adapter-file /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/adapters_mixed_v2/0007500_adapters.safetensors
+data: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/data_mixed_v2
+seed: 42
+
+fine_tune_type: lora
+num_layers: -1
+lora_parameters:
+  rank: 8
+  scale: 4.0
+  dropout: 0.0
+
+batch_size: 1
+grad_accumulation_steps: 1
+iters: 5998                     # 已跑 7500，再跑 5998 = 总 13498
+learning_rate: 5.0e-5
+optimizer: adamw
+mask_prompt: true
+max_seq_length: 2048
+grad_checkpoint: true
+
+# 更密的 ckpt 防再崩（崩了也能从最近点续）
+steps_per_report: 100
+steps_per_eval: 100
+val_batches: 100
+save_every: 1500                # 新计 1500/3000/4500 + 收尾 = 总步 9000/10500/12000/13498
+test: true
+test_batches: 100
+
+adapter_path: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/adapters_mixed_v2

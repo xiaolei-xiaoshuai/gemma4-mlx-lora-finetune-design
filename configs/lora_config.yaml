@@ -1,0 +1,31 @@
+# gemma-4-26B-A4B (4bit QAT) · LoRA 试点配置
+# 100 条 DocVQA 文本 QA，先跑通 pipeline + 看效果
+# 运行: /Users/Admin/venvs/mlx/bin/mlx_lm.lora -c lora_config.yaml --model <LMStudio模型目录> --train
+data: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/data
+seed: 42
+
+# LoRA 本体
+fine_tune_type: lora
+num_layers: -1                  # 全部 30 层（30 层不多，试点就全上）
+lora_parameters:
+  rank: 8
+  scale: 4.0                    # 缩放因子 4（用户指定；默认是 20，4 更温和不易过拟合）
+  dropout: 0.0
+
+# 训练步数（100 条 × 2 遍 ≈ 160 微步；取 200 步 = 2.5 个 epoch 的量级，不高）
+batch_size: 1
+grad_accumulation_steps: 1
+iters: 200
+learning_rate: 5.0e-5          # 和你 10-01 那套 LoRA 的 lr 一致
+optimizer: adamw
+mask_prompt: true              # 只对答案算 loss（prompt 不算）
+max_seq_length: 1024
+grad_checkpoint: true          # 省内存
+steps_per_report: 10
+steps_per_eval: 50
+val_batches: 10
+save_every: 100                # 每 100 步存一个 adapter（100 / 200 各一份）
+test: true
+test_batches: 10
+
+adapter_path: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/adapters

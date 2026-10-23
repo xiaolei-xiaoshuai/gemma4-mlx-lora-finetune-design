@@ -1,0 +1,30 @@
+# Gemma-4 26B-A4B LoRA 全量正式训练（15,000 步 / 100 步一档）
+# 运行: /Users/Admin/venvs/mlx/bin/mlx_lm.lora -c lora_config_full.yaml --model <base> --train
+data: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/data_full
+seed: 42
+
+fine_tune_type: lora
+num_layers: -1                    # 全 30 层
+lora_parameters:
+  rank: 8
+  scale: 4.0                      # 缩放因子 4（用户指定）
+  dropout: 0.0
+
+batch_size: 1
+grad_accumulation_steps: 1
+iters: 15000                      # 一轮训完 15,000 条
+learning_rate: 5.0e-5
+optimizer: adamw
+mask_prompt: true
+max_seq_length: 1024
+grad_checkpoint: true
+
+# —— 100 步一档 ——
+steps_per_report: 100             # 每 100 步打印 loss
+steps_per_eval: 100              # 每 100 步验证一次
+val_batches: 100
+save_every: 100                  # 每 100 步存 checkpoint（1.34G/个，配套清理器只留最新）
+test: true
+test_batches: 100
+
+adapter_path: /Users/Admin/Desktop/微调和强化学习/gemma4-lora-pilot/adapters_full
