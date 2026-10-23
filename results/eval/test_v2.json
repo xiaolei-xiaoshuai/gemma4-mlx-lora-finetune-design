@@ -1,0 +1,7 @@
+{
+  "docvqa": "1. 年龄18周岁（含）至65周岁（含）；\n2. 具有合法、稳定的收入来源；\n3. 信用记录良好；\n4. 有明确的贷款用途；\n5. 同意并遵守贷款银行的各项贷款规定。",
+  "code": "```python\ndef moving_average(nums, window):\n    \"\"\"\n    计算列表的滑动平均值。\n\n    参数:\n    nums (list): 数字列表。\n    window (int): 窗口大小。\n\n    返回:\n    list: 滑动平均值列表，四舍五入到小数点后2位。\n    \"\"\"\n    if len(nums) < window:\n        return []\n\n    averages = []\n    current_sum = sum(nums[:window])  # 初始化第一个窗口的和\n    averages.append(round(current_sum / window, 2))\n\n    for i in range(window, len(nums)):\n        # 加上新进入窗口的数，减去离开窗口的数\n        current_sum += nums[i] - nums[i - window]\n        averages.append(round(current_sum / window, 2))\n\n    return averages\n\n# 测试代码\nif __name__ == \"__main__\":\n    nums = [1, 2, 3, 4, 5]\n    window = 2\n    print(moving_average(nums, window))  # 输出: [1.5, 2.5, 3.5, 4.5]\n\n    nums2 = [1, 2]\n    window2 = 3\n    print(moving_average(nums2, window2))  # 输出: []\n```",
+  "dlg1": "先试最省事的方法：固定作息、睡前别刷手机、卧室保持凉爽。如果持续两周没好转，建议找医生聊聊，别硬扛。",
+  "dlg2": "物价持续上涨、货币购买力下降的现象。",
+  "dlg3": "生日快乐！祝你新的一岁：钱多到花不完，美到没天理，快乐得像中了大奖，而且还没人跟你抢！"
+}

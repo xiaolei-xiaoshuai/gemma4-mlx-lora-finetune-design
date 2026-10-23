@@ -1,0 +1,62 @@
+{
+  "base": {
+    "generic_loss": 6.745753747582205,
+    "generic_ppl": 850.4399021756271,
+    "generations": [
+      {
+        "prompt": "写一首关于秋天的短诗，四句以内",
+        "response": "<|channel>thought\n*   Topic: Autumn (秋天).\n    *   Format: Short poem (短诗).\n    *   Constraint: Within four lines (四句以内).\n\n    *   Colors: Gold, yellow, red, orange (金黄, 枫红, 银杏).\n    *   Nature: Falling leaves (落叶), cool breeze (凉风), clear sky (晴空), harvest (丰收), migrating birds (归"
+      },
+      {
+        "prompt": "用一句话解释什么是大模型的微调",
+        "response": "<|channel>thought\n\n*   Topic: Fine-tuning of Large Language Models (LLMs).\n*   Constraint: One single sentence (一句话).\n*   Goal: Explain what it is.\n\n    *   What is it? Taking a pre-trained model and training it further on a specific dataset.\n    *   Why do it? To make the model better at a specific task (e.g., medical advice, coding, customer service) or to adopt"
+      },
+      {
+        "prompt": "推荐三首适合雨天听的歌，并说说理由",
+        "response": "<|channel>thought\n\n*   Topic: Recommend three songs suitable for a rainy day.\n*   Requirement: Provide the songs and the reasons for each.\n*   Target Audience: General music listeners (needs a variety of moods/genres to be effective).\n\n    *   *Melancholy/Sad:* \"Rainy Day\" by various artists, jazz, lo-fi, acoustic ballads.\n    *   *Cozy/Warm:* Indie folk, bossa nova"
+      },
+      {
+        "prompt": "一个水池有两个进水管，甲管单开6小时灌满，乙管单开4小时灌满，两管齐开几小时灌满？",
+        "response": "<|channel>thought\n\n*   Two inlet pipes (Pipe A and Pipe B).\n    *   Pipe A alone takes 6 hours to fill the pool.\n    *   Pipe B alone takes 4 hours to fill the pool.\n    *   Question: How long does it take to fill the pool if both pipes are open simultaneously?\n\n    *   Let the total volume of the pool be $1$ (or $V$).\n    *   Rate of Pipe"
+      },
+      {
+        "prompt": "用Python写一个函数，统计列表里每个元素出现的次数",
+        "response": "<|channel>thought\n\n*   Goal: Write a Python function to count the occurrences of each element in a list.\n*   Input: A list (e.g., `[1, 2, 2, 3, 3, 3]`).\n*   Output: A way to represent counts (e.g., a dictionary `{1: 1, 2: 2, 3: 3}`).\n\n    *   *Method"
+      },
+      {
+        "prompt": "我最近总是加班到很晚，感觉很累，你给点生活上的建议",
+        "response": "<|channel>thought\nWorking late frequently (overtime), feeling very tired.\nLife advice to cope with/improve the situation.\nEmpathetic, practical, holistic (covering physical, mental, and organizational aspects).\n\n    *   *Physical:* Sleep, diet, exercise, environment.\n    *   *Mental/Emotional:* Stress management, boundaries, mindset.\n    *   *Work/Productivity:* Time management, efficiency, communication.\n    *   *"
+      }
+    ]
+  },
+  "fused": {
+    "generic_loss": 2.2291583240147483,
+    "generic_ppl": 9.292041898712856,
+    "generations": [
+      {
+        "prompt": "写一首关于秋天的短诗，四句以内",
+        "response": "秋风送爽，\n金菊盛开，\n秋色满园，\n秋意浓浓。"
+      },
+      {
+        "prompt": "用一句话解释什么是大模型的微调",
+        "response": "通过在特定任务的数据集上进行训练，使预训练模型能够更好地适应特定领域或任务的需求。"
+      },
+      {
+        "prompt": "推荐三首适合雨天听的歌，并说说理由",
+        "response": "1. 《雨的季节》 - 1974"
+      },
+      {
+        "prompt": "一个水池有两个进水管，甲管单开6小时灌满，乙管单开4小时灌满，两管齐开几小时灌满？",
+        "response": "2.4小时"
+      },
+      {
+        "prompt": "用Python写一个函数，统计列表里每个元素出现的次数",
+        "response": "count_elements(list)"
+      },
+      {
+        "prompt": "我最近总是加班到很晚，感觉很累，你给点生活上的建议",
+        "response": "1. 保证睡眠：尽量保证每天7-8小时的睡眠。\n2. 保证营养：饮食均衡，多吃蔬菜水果。\n3. 运动：每周至少3次，每次30分钟。\n4. 休息：工作间隙，适当休息。\n5. 饮食：少吃甜食，少吃油腻食物。\n6. 饮食：少吃甜食，少吃油腻食物。\n7"
+      }
+    ]
+  }
+}

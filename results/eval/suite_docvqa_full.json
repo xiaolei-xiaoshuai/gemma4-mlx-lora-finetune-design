@@ -1,0 +1,357 @@
+{
+  "meta": {
+    "model": "/Users/Admin/.lmstudio/models/local/gemma-4-26B-A4B-docvqa-lora-full",
+    "suite": "test_suite.json",
+    "groups": [
+      "docvqa",
+      "code",
+      "dialogue",
+      "multi_turn",
+      "math",
+      "reasoning",
+      "summarization",
+      "instruction"
+    ],
+    "sampling": {
+      "temp": 0.7,
+      "top_p": 0.95,
+      "max_tokens": 512
+    }
+  },
+  "groups": {
+    "docvqa": {
+      "description": "文档问答（DocVQA 领域）",
+      "questions": [
+        {
+          "id": "docvqa_1",
+          "prompt": "你是一名文档问答助手。根据下面的文档内容回答问题。\n\n【文档】\n3.4 贷款发放\n3.4.1 贷款发放对象\n具有中华人民共和国国籍或永久居留权，具有完全民事行为能力，在贷款银行开立个人结算账户的个人客户。\n3.4.2 贷款发放条件\n(1) 年龄18周岁（含）至65周岁（含）；(2) 具有合法、稳定的收入来源；(3) 信用记录良好；(4) 有明确的贷款用途；(5) 同意并遵守贷款银行的各项贷款规定。\n3.4.3 贷款金额\n个人贷款额度一般为1000元至50万元（含），具体额度由贷款银行根据借款人的资信状况和偿还能力核定。\n\n【问题】申请个人贷款需要满足哪些条件？",
+          "response": "1. 年龄18周岁（含）至65周岁（含）；\n2. 具有合法、稳定的收入来源；\n3. 信用记录良好；\n4. 有明确的贷款用途；\n5. 同意并遵守贷款银行的各项贷款规定。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 83,
+            "n_tokens_approx": 41
+          },
+          "seconds": 2.4
+        },
+        {
+          "id": "docvqa_2",
+          "prompt": "你是一名文档问答助手。根据下面的文档内容回答问题。\n\n【文档】\n第5章 设备维护\n5.1 巡检周期：关键设备每日巡检一次，普通设备每周巡检一次。\n5.2 故障分级：一级故障（停线）须30分钟内响应；二级故障（降级运行）2小时内响应；三级故障（一般异常）24小时内处理。\n5.3 备件管理：一级设备备件库存不得少于2件，每季度核对一次。\n\n【问题】一级故障的响应时限是多少？关键设备多久巡检一次？",
+          "response": "30分钟内响应；每日巡检一次。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 15,
+            "n_tokens_approx": 7
+          },
+          "seconds": 0.9
+        },
+        {
+          "id": "docvqa_3",
+          "prompt": "你是一名文档问答助手。根据下面的文档内容回答问题。\n\n【文档】\n员工考勤制度（节选）\n一、工作时间：标准工时每日8小时，每周40小时。\n二、加班：平日加班按1.5倍计酬，休息日加班且不能补休的按2倍计酬，法定节假日加班按3倍计酬。\n三、请假：事假无薪，病假按国家规定计发。\n\n【问题】法定节假日加班的工资倍数是多少？事假是否计薪？",
+          "response": "3倍；不计薪",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 6,
+            "n_tokens_approx": 3
+          },
+          "seconds": 0.8
+        }
+      ],
+      "summary": {
+        "n": 3,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    },
+    "code": {
+      "description": "编程（代码生成）",
+      "questions": [
+        {
+          "id": "code_1",
+          "prompt": "用 Python 写一个函数 `moving_average(nums, window)`，返回列表的滑动平均值（四舍五入到小数点后2位）。\n要求：\n1. 当 len(nums) < window 时返回 []\n2. 输入 [1,2,3,4,5]，window=2 时输出 [1.5, 2.5, 3.5, 4.5]\n3. 不要使用统计库，手写累加。直接给出可运行的代码。",
+          "response": "function moving_average(nums, window):\n    if len(",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 50,
+            "n_tokens_approx": 25
+          },
+          "seconds": 0.9
+        },
+        {
+          "id": "code_2",
+          "prompt": "用 Python 写一个函数 `group_by(items, key)`，把一个字典列表按 key 分组，返回 {key值: [原字典,...]}。要求保持原顺序，不用第三方库，直接给可运行代码和一个简单示例。",
+          "response": "thought\n*   Input: A list of dictionaries (`items`), a specific key (`key`).\n    *   Output: A dictionary where keys are the distinct values of the specified `key` from the input list, and values are lists of dictionaries that contain that specific key value.\n    *   Constraint 1: Maintain original order of the items.\n    *   Constraint 2: No third-party libraries (like Pandas).\n*   Requirement: Python function `group_by(items, key)`, runnable code, and a simple example.\n\n    *   Initialize an empty dictionary `result`.\n    *   Iterate through the `items` list.\n    *   For each item, get the value associated with the `key`.\n    *   If the value is not in `result`, create a new list in `result` with the current item.\n    *   If the value is already in `result`, append the current item to the existing list.\n    *   Return `result`.\n\n    *   *Self-Correction/Refinement:* Using `dict.setdefault()` or `collections.defaultdict` is standard. However, the prompt says \"no third party libraries\". `collections` is a standard library, but I'll stick to the basic `dict` to be as \"pure\" as possible, though `defaultdict` is cleaner. Let's stick to a standard loop with `if key in result` for simplicity and readability.\n\n    ```python\n    def group_by(items, key):\n        result = {}\n        for item in items:\n            # Get the value for the key\n            # Use .get() to avoid KeyError if key is missing in some dicts\n            val = item.get(key)\n            if val not in result:\n r result[val] = []\n            result[val].append(item)\n        return result\n    ```\n\n    *   Data: List of dicts representing users (name, city).\n    *   Call: `group_by(users, 'city')`\n    *   Expectation: A dict with keys like 'CityA', 'CityB' containing the user dicts.\n\n    *   Function `group_by(items, key)`? Yes.\n    *   Dictionary list as input? Yes.\n    *   Group by key? Yes.\n    *   Return `{key_value: [dict",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": true,
+            "n_chars": 1918,
+            "n_tokens_approx": 959
+          },
+          "seconds": 13.3
+        },
+        {
+          "id": "code_3",
+          "prompt": "用 Python 实现一个 LRU 缓存类 `LRUCache(capacity)`，支持 get(key) 和 put(key, value)，O(1) 时间复杂度。直接给可运行代码。",
+          "response": "- 0-9",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 5,
+            "n_tokens_approx": 2
+          },
+          "seconds": 0.7
+        }
+      ],
+      "summary": {
+        "n": 3,
+        "thought_leak": 0,
+        "code_fenced": 1
+      }
+    },
+    "dialogue": {
+      "description": "日常对话 / 生活助手",
+      "questions": [
+        {
+          "id": "dlg_1",
+          "prompt": "我连续两周失眠，早上7点要上班，怎么办？",
+          "response": "| 解决方案 | 描述 |\n| :--- | :--- |\n| **1. 调整作息** | 尝试比平时提前 20 分钟上床。 |\n| **2. 睡前放松** | 睡前 1 小时停止使用电子设备。 |\n| **3. 饮食控制** | 睡前避免摄入过多的咖啡因。 |\n| **4. 进食注意**| 睡前不要吃太饱。 |\n| **5. 运动建议** | 白天进行适当运动。 |\n| **6. 寻求专业帮助** | 如果问题持续，请咨询医生。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 217,
+            "n_tokens_approx": 108
+          },
+          "seconds": 3.9
+        },
+        {
+          "id": "dlg_2",
+          "prompt": "用三句话给我讲讲什么是通货膨胀。",
+          "response": "通货膨胀是指由于货币供应量增长超过商品生产增长，导致物价水平整体上涨的过程。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 38,
+            "n_tokens_approx": 19
+          },
+          "seconds": 0.8
+        },
+        {
+          "id": "dlg_3",
+          "prompt": "帮我给好朋友写一段生日祝福，要幽默一点。",
+          "response": "\"Happy Birthday! I was going to get you a really expensive gift, but then I remembered that having me as a friend is already a gift in itself. So, you're welcome!\"",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 163,
+            "n_tokens_approx": 81
+          },
+          "seconds": 1.2
+        }
+      ],
+      "summary": {
+        "n": 3,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    },
+    "multi_turn": {
+      "description": "多轮对话（考察上下文保持）",
+      "questions": [
+        {
+          "id": "mt_1",
+          "prompt": [
+            {
+              "role": "user",
+              "content": "我打算在阳台种番茄。"
+            },
+            {
+              "role": "assistant",
+              "content": "阳台种番茄可行，关键是光照和容器。你每天能保证几小时直射光？"
+            },
+            {
+              "role": "user",
+              "content": "大概4-5小时。那我要准备多大的盆？还要补光吗？"
+            }
+          ],
+          "response": "4-5小时直射光不算很充足，但对某些品种来说够了。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 25,
+            "n_tokens_approx": 12
+          },
+          "seconds": 0.9
+        },
+        {
+          "id": "mt_2",
+          "prompt": [
+            {
+              "role": "user",
+              "content": "帮我列一个周末去杭州的两天行程。"
+            },
+            {
+              "role": "assistant",
+              "content": "可以。第一天建议西湖+灵隐寺，第二天西溪湿地。你更想看自然风光还是人文？"
+            },
+            {
+              "role": "user",
+              "content": "偏人文一点，帮我调整一下。"
+            }
+          ],
+          "response": "OK",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 2,
+            "n_tokens_approx": 1
+          },
+          "seconds": 0.5
+        }
+      ],
+      "summary": {
+        "n": 2,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    },
+    "math": {
+      "description": "数学 / 计算",
+      "questions": [
+        {
+          "id": "math_1",
+          "prompt": "一个水池有两个进水管，单独开A管6小时注满，单独开B管4小时注满。两管同时开，多少小时注满？请给出推理。",
+          "response": "2.4小时",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 5,
+            "n_tokens_approx": 2
+          },
+          "seconds": 0.5
+        },
+        {
+          "id": "math_2",
+          "prompt": "小明买了3支铅笔和2支钢笔共花了15元，1支钢笔比1支铅笔贵3元。铅笔和钢笔各多少元？",
+          "response": "铅笔15元",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 5,
+            "n_tokens_approx": 2
+          },
+          "seconds": 0.6
+        }
+      ],
+      "summary": {
+        "n": 2,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    },
+    "reasoning": {
+      "description": "逻辑推理",
+      "questions": [
+        {
+          "id": "reason_1",
+          "prompt": "张三说：李四是说谎者。李四说：王五是说谎者。王五说：张三和李四都是说谎者。已知只有一种人说真话、一种人说假话，且三人中只有一人说真话。谁在说真话？",
+          "response": "王五",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 2,
+            "n_tokens_approx": 1
+          },
+          "seconds": 0.5
+        },
+        {
+          "id": "reason_2",
+          "prompt": "把1到9这9个数字填入九宫格（3x3），每行每列每条对角线之和都相等。这个相等的和是多少？给出推导。",
+          "response": "15",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 2,
+            "n_tokens_approx": 1
+          },
+          "seconds": 0.5
+        }
+      ],
+      "summary": {
+        "n": 2,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    },
+    "summarization": {
+      "description": "摘要 / 概括",
+      "questions": [
+        {
+          "id": "sum_1",
+          "prompt": "用不超过50字概括下面这段话：\n近年来，随着人工智能在医疗影像诊断中的应用不断深入，CT和MRI图像的自动识别准确率已接近甚至超过资深放射科医生。但医生仍需在最终诊断中承担法律责任，因此人机协同而非完全替代，是更现实的路径。",
+          "response": "AI提高医疗影像识别率，但医生仍需承担法律责任，故人机协同是未来发展方向。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 37,
+            "n_tokens_approx": 18
+          },
+          "seconds": 1.0
+        },
+        {
+          "id": "sum_2",
+          "prompt": "把下面这段技术说明压缩成3个要点，每个要点不超过20字：\nLoRA 微调通过在主模型旁挂一对低秩矩阵来近似更新，从而在不改动原权重的前提下大幅减少可训练参数量和显存占用。训练完成后，低秩矩阵可以融合进原权重，部署时无额外推理开销。",
+          "response": "1. Low-rank matrix approximation, reducing parameters.\n2. No changes to original weights.\n3. Merging possible, no inference overhead.\n\n*Wait, I need to translate the Chinese text into three Chinese bullet points as requested by thethought process, though the prompt is in Chinese.*\n\n*Self-Correction/Refinement:*\nPoint 1: 挂低秩矩阵，减少参数量与显存占用。 (20 chars)\nPoint 2: 不改动原权重，训练效率提升。 (16 chars)\nPoint 3: 权重可融合，部署无额外开销。 (15 chars)\n\nLet's try to make them even tighter to ensure they are punchy.\n\nDraft 1:\n1. 低秩矩阵近似，减少参数与显存占用。\n2. 不改动原权重，训练效率更高。\n3. 权重可融合，部署无额外推理开销。\n\nLet's re-evaluate the \"not changing original weights\" part. The text says \"不改动原权重的前提下\" which explains *how* it reduces parameters.\n\nRevised Draft:\n1. 利用低秩矩阵近似，减少参数量与显存占用。\n2. 训练过程中不改动原权重，提升效率。\n3. 权重可融合，实现零额外推理开销。\n\nLet'1 count characters:\n1. 24 characters (Too long)\n2. 18 characters (Good)\n3. 16 characters (Good)\n\nLet's try again.\n\n1. 低秩矩阵近似，大幅减少参数与显存。\n2. 不改动原权重，降低训练成本。\n3. 支持权重融合，部署无额外推理开销。\n\nCharacter counts:\n1. 17 chars\n2. 14 chars\n3. 17 chars\n\nThis looks good.\n\nLet's try one more variation to see if I can capture the essence better.\n1. 低秩矩阵近似，减少参数量与显存占用。\n2. 不需改动原权重，训练更加高效。\n3. 支持权重融合，部署无额外推理开销。\n\nWait, the user asked to \"compress into 3 points, each not exceeding 20 words\". The \"words\" in English means \"characters\" in Chinese context usually, but I will stick to the character count",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 1345,
+            "n_tokens_approx": 672
+          },
+          "seconds": 13.4
+        }
+      ],
+      "summary": {
+        "n": 2,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    },
+    "instruction": {
+      "description": "指令遵循 / 格式约束",
+      "questions": [
+        {
+          "id": "inst_1",
+          "prompt": "只输出一个JSON对象，不要任何解释、不要代码块，键为name和age，值分别为'Agnes'和28。",
+          "response": "{\"name\": \"Agnes\", \"age\": 28}",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 28,
+            "n_tokens_approx": 14
+          },
+          "seconds": 0.8
+        },
+        {
+          "id": "inst_2",
+          "prompt": "用恰好三行回答'什么是机器学习'，每行必须以数字序号开头（1. 2. 3.），总字数不超过60字。",
+          "response": "1. 分析数据并从中学习。\n2. 构建预测模型的算法。\n3. 提高计算机的执行能力。",
+          "metrics": {
+            "thought_leak": false,
+            "code_fenced": false,
+            "n_chars": 42,
+            "n_tokens_approx": 21
+          },
+          "seconds": 1.1
+        }
+      ],
+      "summary": {
+        "n": 2,
+        "thought_leak": 0,
+        "code_fenced": 0
+      }
+    }
+  }
+}
